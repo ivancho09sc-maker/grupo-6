@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elixir Urbano - Proyecto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+  <header class="header">
+    <h1>Elixir Urbano</h1>
+    <p>Sistema de Información para la Gestión de Inventario</p>
+    <nav class="nav">
+      <a href="#resumen">Resumen</a>
+      <a href="#objetivos">Objetivos</a>
+      <a href="#mision">Misión</a>
+      <a href="#vision">Visión</a>
+      <a href="{{ url_for('productos') }}">Productos</a>
+      <a href="#dofa">DOFA</a>
+      <a href="#requisitos">Requisitos</a>
+    </nav>
+    <div class="top-actions">
+      {% if usuario_actual %}
+        <a class="btn" href="{{ url_for('productos') }}">Gestionar Inventario</a>
+        <a class="btn btn-secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+      {% else %}
+        <a class="btn" href="{{ url_for('login') }}">Iniciar sesión</a>
+        <a class="btn btn-secondary" href="{{ url_for('registro') }}">Registrarse</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <section id="resumen" class="section">
+    <h2>Resumen</h2>
+    <p>
+      El proyecto propone el diseño, desarrollo e implementación de un sistema de información para la gestión de inventario en la droguería Elixir Urbano, con el fin de optimizar procesos internos, reducir errores, garantizar disponibilidad de medicamentos y mejorar la calidad del servicio.
+    </p>
+    <p><strong>Total de productos registrados:</strong> {{ total_productos }}</p>
+    <p><strong>Total de usuarios registrados:</strong> {{ total_usuarios }}</p>
+  </section>
+
+  <section id="objetivos" class="card">
+    <h2>Objetivos</h2>
+    <h3>General:</h3>
+    <p>Diseñar, desarrollar e implementar un sistema de información para la gestión y control del inventario.</p>
+    <h3>Específicos:</h3>
+    <ul>
+      <li>Identificar medicamentos de mayor rotación.</li>
+      <li>Analizar el flujo actual y puntos críticos.</li>
+      <li>Diseñar la arquitectura del sistema.</li>
+      <li>Elaborar cronograma y presupuesto.</li>
+      <li>Desarrollar módulos de usuarios, inventario y ventas.</li>
+      <li>Implementar controles de stock mínimo y alertas.</li>
+      <li>Capacitar al personal.</li>
+      <li>Realizar pruebas y recoger retroalimentación.</li>
+    </ul>
+  </section>
+
+  <section class="grid">
+    <div id="mision" class="card-green">
+      <h2>Misión</h2>
+      <p>Brindar a la comunidad un servicio eficiente y seguro en la distribución de medicamentos, optimizando la gestión de inventarios mediante un sistema moderno.</p>
+    </div>
+    <div id="vision" class="card-green">
+      <h2>Visión</h2>
+      <p>Convertirse en un referente local y regional en gestión eficiente de inventarios, consolidándose al 2030 como la droguería más innovadora tecnológicamente.</p>
+    </div>
+  </section>
+
+  <section id="dofa" class="card">
+    <h2>Matriz DOFA</h2>
+    <div class="grid">
+      <div>
+        <h3>Fortalezas</h3>
+        <ul>
+          <li>Variedad de productos</li>
+          <li>Ubicación estratégica</li>
+          <li>Personal capacitado</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Oportunidades</h3>
+        <ul>
+          <li>Crecimiento del mercado farmacéutico</li>
+          <li>Tendencia al control digital</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Debilidades</h3>
+        <ul>
+          <li>Procesos manuales</li>
+          <li>Riesgo de pérdida de medicamentos</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Amenazas</h3>
+        <ul>
+          <li>Competencia de grandes cadenas</li>
+          <li>Regulaciones sanitarias estrictas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="requisitos" class="section">
+    <h2>Requisitos del Sistema</h2>
+    <h3>Funcionales</h3>
+    <ul>
+      <li>Autenticación segura de usuarios</li>
+      <li>Gestión de clientes y productos con base de datos</li>
+      <li>Generación de reportes básicos en tiempo real</li>
+      <li>CRUD completo de inventario</li>
+    </ul>
+    <h3>No Funcionales</h3>
+    <ul>
+      <li>Interfaz adaptable</li>
+      <li>Persistencia en base de datos</li>
+      <li>Contraseñas cifradas</li>
+      <li>Proyecto desarrollado en Python</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Droguería Elixir Urbano - Proyecto Académico</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario - Elixir Urbano</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+  <header class="header">
+    <h1>Inventario de Productos</h1>
+    <p>Gestión y organización de medicamentos</p>
+    <nav class="nav">
+      <a href="{{ url_for('index') }}">Inicio</a>
+      <a href="{{ url_for('proyectofinal') }}">productos</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Productos Disponibles</h2>
+    <div class="grid">
+      {% for producto in productos %}
+      <div class="card-green">
+        <img src="{{ producto.imagen or 'https://via.placeholder.com/300x180?text=Producto' }}" alt="{{ producto.nombre }}">
+        <h3>{{ producto.nombre }}</h3>
+        <p>${{ "{:,.0f}".format(producto.precio) }}</p>
+        <p>{{ producto.descripcion or "Producto de inventario" }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Droguería Elixir Urbano - Proyecto Académico</p>
+  </footer>
+</body>
+</html>
